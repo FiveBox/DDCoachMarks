@@ -69,7 +69,7 @@
     // calculate and position text
     CGSize offsets = [self offsets];
     float actualXPosition = offsets.width+PADDING*1.5;
-    float actualYPosition = offsets.height;//+PADDING*1.25;
+    float actualYPosition = offsets.height+PADDING*1.25;
     float actualWidth = self.frame.size.width-actualXPosition - PADDING*1.5;
     float actualHeight = self.frame.size.height - actualYPosition - PADDING*1.2;
     
