@@ -19,6 +19,7 @@ static const CGFloat    kLblSpacing = 35.0f;
 @interface DDCoachMarksView ()
 @property (nonatomic, strong) DDCircleView  *animatingCircle;
 @property (nonatomic, strong) DDBubble      *bubble;
+@property                     CGRect        currentShape;
 @end
 
 @implementation DDCoachMarksView {
@@ -143,8 +144,12 @@ static const CGFloat    kLblSpacing = 35.0f;
 
 - (void)userDidTap:(UITapGestureRecognizer *)recognizer {
     
-    if ([self.delegate respondsToSelector:@selector(didTapAtIndex:)]) {
-        [self.delegate didTapAtIndex:markIndex];
+    if ([self.delegate respondsToSelector:@selector(didTapAtIndex: onBubble:)]) {
+        CGPoint point = [recognizer locationInView:self];
+        CGRect touchRect = CGRectMake(point.x, point.y, 1.0, 1.0);
+        BOOL touchedBubble = CGRectIntersectsRect(self.currentShape, touchRect) || CGRectIntersectsRect(self.bubble.frame, touchRect);
+        
+        [self.delegate didTapAtIndex:markIndex onBubble: touchedBubble];
     }
     
     // Go to the next coach mark
@@ -200,6 +205,8 @@ static const CGFloat    kLblSpacing = 35.0f;
 
     // Animate the cutout
     [self animateCutoutToRect:markRect withShape:shape];
+    
+    self.currentShape = markRect;
     
     // Animate swipe gesture
     [self showSwipeGesture];

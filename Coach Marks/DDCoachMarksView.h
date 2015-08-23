@@ -34,6 +34,6 @@
 - (void)coachMarksView:(DDCoachMarksView*)coachMarksView didNavigateToIndex:(NSUInteger)index;
 - (void)coachMarksViewWillCleanup:(DDCoachMarksView*)coachMarksView;
 - (void)coachMarksViewDidCleanup:(DDCoachMarksView*)coachMarksView;
-- (void)didTapAtIndex:(NSUInteger)index;
+- (void)didTapAtIndex:(NSUInteger)index onBubble:(BOOL)onBubble;
 
 @end
